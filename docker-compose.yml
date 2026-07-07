@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  elevation_mapping:
+    image: elevation_mapping:latest
+    container_name: elevation_mapping_container
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.x64
+      target: runtime
+      args:
+        - ROS_DISTRO=humble
+        - USERNAME=ros
+        # Automatically matches the host's user/group IDs
+        - USER_UID=1000
+        - USER_GID=1000
+        - INSTALL_EMCUPY_ROSDEPS=true
+    
+    # Privileged & host networking (as per run.sh)
+    privileged: true
+    network_mode: host
+    ipc: host
+
+    # User matching
+    user: ros
+
+    # Hardware acceleration (NVIDIA GPU access)
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+    # Environment variables matching your ROS setup & run.sh
+    environment:
+      - DISPLAY=${DISPLAY}
+      - XAUTHORITY=/tmp/.docker.xauth
+      - QT_X11_NO_MITSHM=1
+      # Your requested network/ROS parameters
+      - RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+      - ROS_DOMAIN_ID=33
+      - ROS_AUTOMATIC_DISCOVERY_RANGE=SUBNET
+      - ROS_LOCALHOST_ONLY=0
+      - TURTLEBOT3_MODEL=waffle_realsense_depth
+
+    # Host-to-Container Volume mappings for X11 & dynamic ROS configs
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - /tmp/.docker.xauth:/tmp/.docker.xauth:rw
+      - ./elevation_mapping_cupy/config:/home/ros/ros_ws/install/share/elevation_mapping_cupy/config:rw
+      - ./plane_segmentation_ros2/convex_plane_decomposition_ros/config:/home/ros/ros_ws/install/share/convex_plane_decomposition_ros/config:rw
+
+    # Keep container open and interactive
+    stdin_open: true
+    tty: true
+    command: bash
