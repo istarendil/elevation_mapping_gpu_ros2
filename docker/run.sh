@@ -54,7 +54,7 @@ docker run --rm -it \
     --env DISPLAY="$DISPLAY" \
     --env XAUTHORITY="$XAUTH" \
     --env QT_X11_NO_MITSHM=1 \
-    --env ROS_DOMAIN_ID=1 \
+    --env ROS_DOMAIN_ID=33 \
     --env ROS_LOCALHOST_ONLY=0 \
     \
     --volume "$XSOCK:$XSOCK:rw" \

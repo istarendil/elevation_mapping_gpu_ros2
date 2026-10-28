@@ -267,7 +267,7 @@ RUN mkdir -p ${ROS_WS}/install/share/elevation_mapping_cupy/config
 
 # ── Shell environment ────────────────────────────────────────────────────────
 
-ENV ROS_DOMAIN_ID=1 \
+ENV ROS_DOMAIN_ID=33 \
     TURTLEBOT3_MODEL=waffle_realsense_depth
 
 WORKDIR ${ROS_WS}

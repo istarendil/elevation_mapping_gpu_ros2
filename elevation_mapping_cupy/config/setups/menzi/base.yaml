@@ -4,10 +4,10 @@
     # ── Sensor Input (uncomment ONE section based on your sensor) ─────────────
 
     # Option 1 – Intel RealSense D435i (depth camera)
-    # subscribers:
-    #   realsense_camera:
-    #     topic_name: '/realsense/front/camera/depth/color/points'
-    #     data_type: pointcloud
+    subscribers:
+      realsense_camera:
+        topic_name: '/elevationmap_camera_01/elevationmap_camera_01/depth/color/points'
+        data_type: pointcloud
 
     # Option 2 – Unitree L1 LiDAR (real robot)
     # subscribers:
@@ -34,10 +34,10 @@
     #     data_type: pointcloud
 
     # Option 5 – Isaac Sim front RGB-D camera (simulation)
-    subscribers:
-      isaacsim_camera:
-        topic_name: '/camera_front_pcl'
-        data_type: pointcloud
+    # subscribers:
+    #   isaacsim_camera:
+    #     topic_name: '/camera_front_pcl'
+    #     data_type: pointcloud
 
     # ── Map Output Layers ──────────────────────────────────────────────────────
     publishers:

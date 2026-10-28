@@ -53,7 +53,7 @@
 
     # Default frame configuration (can be overridden in robot-specific configs)
     map_frame: 'odom'                               # The map frame where the odometry source uses.
-    base_frame: 'base'                    # The robot's base frame. This frame will be a center of the map.
+    base_frame: 'base_frame'                    # The robot's base frame. This frame will be a center of the map.
     corrected_map_frame: 'odom'
 
     #### Feature toggles ########
@@ -71,7 +71,7 @@
 
     #### Initializer ########
     initialize_method: 'linear'                                         # Choose one from 'nearest', 'linear', 'cubic'
-    initialize_frame_id: ['base']   # One tf (like ['footprint'] ) initializes a square around it.
+    initialize_frame_id: ['base_frame']   # One tf (like ['footprint'] ) initializes a square around it.
     initialize_tf_offset: [0.0]                                         # Optional z-offset(s) for initializer (same length as initialize_frame_id).
     dilation_size_initialize: 2                                         # dilation size after the init.
     initialize_tf_grid_size: 1.0                                        # This is not used if number of tf is more than 3.
