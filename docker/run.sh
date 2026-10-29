@@ -56,6 +56,7 @@ docker run --rm -it \
     --env QT_X11_NO_MITSHM=1 \
     --env ROS_DOMAIN_ID=33 \
     --env ROS_LOCALHOST_ONLY=0 \
+    --env CYCLONEDDS_URI='<CycloneDDS><Domain><Internal><SocketReceiveBufferSize min="default" max="8MB"/></Internal></Domain></CycloneDDS>' \
     \
     --volume "$XSOCK:$XSOCK:rw" \
     --volume "$XAUTH:$XAUTH:rw" \
